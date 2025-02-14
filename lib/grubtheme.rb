@@ -20,6 +20,8 @@ class GrubTheme
 		terminal_box 		= nil,
 		terminal_font 		= nil
 	)
+		@buf				= ""
+
 		@title_text 		= title_text
 		@title_font 		= title_font
 		@title_color 		= title_color
@@ -98,7 +100,10 @@ class GrubTheme
 	# Generate.
 	def gen()
 		if checkup()
-			puts("Buildin..")
+			unless @title_text.nil?
+				push("title-text: #{@title_text}")
+			end
+			@buf
 		else
 			raise("Required fields not yet met.")
 		end
@@ -107,5 +112,9 @@ class GrubTheme
 	## This checkup is just for only required fields.
 	private def checkup()
 		true
+	end
+
+	private def push(data)
+		@buf += "#{data}\n"
 	end
 end
