@@ -3,7 +3,7 @@
 ## singular: 
 ## 	- title_text, title_font, title_color, message_font, message_color,
 ##	- message_bg_color, desktop_image, desktop_color, terminal_box, terminal_font.
-## multpile: 
+## multpile: boot_menu, image.
 
 # TODO: add call method for all public methods.
 
@@ -101,7 +101,7 @@ class GrubTheme
 	def gen()
 		if checkup()
 			unless @title_text.nil?
-				push("title-text: #{@title_text}")
+				push("title-text: \"#{@title_text}\"")
 			end
 			@buf
 		else
@@ -111,7 +111,13 @@ class GrubTheme
 
 	## This checkup is just for only required fields.
 	private def checkup()
-		true
+		ret = true
+		if @title_text.nil?
+			warn("title_text is required.", uplevel: 2)
+			ret = false
+		end
+
+		ret
 	end
 
 	private def push(data)
