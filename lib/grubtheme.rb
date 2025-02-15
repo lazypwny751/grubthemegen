@@ -1,3 +1,4 @@
+# Full ref: https://www.gnu.org/software/grub/manual/grub/html_node/Theme-file-format.html
 # That's good start for now:
 ## https://github.com/Ste74/Grub2-Theme/blob/master/manj-grub/theme.txt
 ## singular: 
@@ -103,6 +104,43 @@ class GrubTheme
 			unless @title_text.nil?
 				push("title-text: \"#{@title_text}\"")
 			end
+
+			unless @title_font.nil?
+				push("title-font: \"#{@title_font}\"")
+			end
+
+			unless @title_color.nil?
+				push("title-color: \"#{@title_color}\"")
+			end
+
+			unless @message_font.nil?
+				push("message-font: \"#{@message_font}\"")
+			end
+
+			unless @message_color.nil?
+				push("message-color: \"#{@message_color}\"")
+			end
+
+			unless @message_bg_color.nil?
+				push("message-bg-color: \"#{@message_bg_color}\"")
+			end
+
+			unless @desktop_image.nil?
+				push("desktop-image: \"#{@desktop_image}\"")
+			end
+
+			unless @desktop_color.nil?
+				push("desktop-color: \"#{@desktop_color}\"")
+			end
+
+			unless @terminal_box.nil?
+				push("terminal-box: \"#{@terminal_box}\"")
+			end
+
+			unless @terminal_font.nil?
+				push("terminal-font: \"#{@terminal_font}\"")
+			end
+
 			@buf
 		else
 			raise("Required fields not yet met.")
@@ -112,6 +150,7 @@ class GrubTheme
 	## This checkup is just for only required fields.
 	private def checkup()
 		ret = true
+
 		if @title_text.nil?
 			warn("title_text is required.", uplevel: 2)
 			ret = false
