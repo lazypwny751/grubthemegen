@@ -106,7 +106,11 @@ class GrubTheme
 		unless kwargs[:id].nil?
 			buf = "+ label {\n"
 			# text, font, color, align, visible
-			buf += "\ttext = \"#{text}\"\n" # buf += write2buf(text, "text", true)
+			buf += single_property(val: text, key: "text", bracets:	true)
+			buf += single_property(val: font, key: "font", bracets: true)
+			buf += single_property(val: color, key: "color", bracets: true)
+			buf += single_property(val: align, key: "align", bracets: true)
+			buf += single_property(val: visible, key: "visible", bracets: false)
 			buf += common_properties(**kwargs)
 			buf += "}\n"
 
@@ -120,7 +124,7 @@ class GrubTheme
 	def image(file: nil, **kwargs)
 		unless file.nil?
 			buf = "+ image {\n"
-			buf += "\tfile = \"#{file}\"\n"
+			buf += single_property(val: file, key: "file", bracets: true)
 			buf += common_properties(**kwargs)
 			buf += "}\n"
 
@@ -183,6 +187,18 @@ class GrubTheme
 		end
 
 		@buf
+	end
+
+	private def single_property(val: nil, key: nil, bracets: false)
+		unless val.nil?
+			if bracets
+				"\t#{key} = \"#{val}\"\n"
+			else
+				"\t#{key} = #{val}\n"
+			end
+		else
+			""
+		end
 	end
 
 	private def common_properties(**kwargs)
