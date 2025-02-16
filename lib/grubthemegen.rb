@@ -102,8 +102,7 @@ class GrubTheme
 	# Components.
 	## Label.
 	def label(text: nil, font: nil, color: nil, align: nil, visible: nil, **kwargs)
-		# id is required for generation.
-		unless kwargs[:id].nil?
+		if nil_var?(*text, *font, *color, *align, *visible, **kwargs)
 			buf = "+ label {\n"
 			# text, font, color, align, visible
 			buf += single_property(val: text, key: "text", bracets:	true)
@@ -116,12 +115,13 @@ class GrubTheme
 
 			@bufcomp += buf
 		else
-			warn("\"id\" is required for this component.", uplevel: 1)
+			warn("no parameter(s) given, so nothing to do..", uplevel: 1)
 		end
 	end
 
 	## Image.
 	def image(file: nil, **kwargs)
+		# "file" field is required for this property.
 		unless file.nil?
 			buf = "+ image {\n"
 			buf += single_property(val: file, key: "file", bracets: true)
@@ -187,6 +187,22 @@ class GrubTheme
 		end
 
 		@buf
+	end
+
+	private def nil_var?(*args, **kwargs)
+		ret = false
+		args.each { |i|
+			unless i.nil?
+				ret = true
+			end
+		}
+		kwargs.each { |i|
+			unless i.nil?
+				ret = true
+			end
+		}
+
+		ret
 	end
 
 	private def single_property(val: nil, key: nil, bracets: false)

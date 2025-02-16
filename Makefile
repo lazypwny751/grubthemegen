@@ -1,7 +1,7 @@
 # This Makefile is just for development.
 
 VERSION := 0.1.0
-NAME := rubythemegen
+NAME := grubthemegen
 GEMSPEC := $(NAME).gemspec
 FILE := $(NAME)-$(VERSION).gem
 
