@@ -1,5 +1,8 @@
 require "grubthemegen"
 
+# örn: theme.push(theme.vbox(teheme.label(id: "__timeout__")))
+# örn: theme.push(theme.label(text: "hello"))
+
 theme = GrubTheme.new()
 
 theme.title_text = "Lazy Grub"
@@ -15,5 +18,8 @@ theme.label() # Null label (it won't be processed).
 
 theme.image(file: "merhaba.png", id: "merhaba")
 theme.image(file: "deneme.png")
+theme.progress_bar()
+
+theme.deneme(theme.label(id: "test"))
 
 puts(theme.gen())

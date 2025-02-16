@@ -1,18 +1,18 @@
-# rubythemegen
+# grubthemegen
 Simple library for theme file format generator written in ruby.
 
 [ref](https://www.gnu.org/software/grub/manual/grub/html_node/Theme-file-format.html)
 
 # Installation.
 ```
-gem install rubythemegen
+gem install grubthemegen
 # for uninstall.
 gem uninstall <>
 ```
 
 # Usage
 ```
-require "grubtheme"
+require "grubthemegen"
 ```
 
 # Contributing.

@@ -102,7 +102,7 @@ class GrubTheme
 	# Components.
 	## Label.
 	def label(text: nil, font: nil, color: nil, align: nil, visible: nil, **kwargs)
-		if nil_var?(*text, *font, *color, *align, *visible, **kwargs)
+		unless nil_var?(*text, *font, *color, *align, *visible, **kwargs)
 			buf = "+ label {\n"
 			# text, font, color, align, visible
 			buf += single_property(val: text, key: "text", bracets:	true)
@@ -115,13 +115,13 @@ class GrubTheme
 
 			@bufcomp += buf
 		else
-			warn("no parameter(s) given, so nothing to do..", uplevel: 1)
+			warn("#{__method__}: no field(s) given, so nothing to do..", uplevel: 1)
 		end
 	end
 
 	## Image.
 	def image(file: nil, **kwargs)
-		# "file" field is required for this property.
+		### "file" field is required for this component.
 		unless file.nil?
 			buf = "+ image {\n"
 			buf += single_property(val: file, key: "file", bracets: true)
@@ -130,15 +130,69 @@ class GrubTheme
 
 			@bufcomp += buf
 		else
-			warn("\"file\" is required for this component.", uplevel: 1)
+			warn("#{__method__}: \"file\" field is required for this component.", uplevel: 1)
 		end
 	end
 
 	## Progress bar.
+	### fg_color, bg_color, border_color, text_color, bar_style, highlight_style, highlight_overlay, font, text
+	def progress_bar(
+		fg_color: 			nil, 
+		bg_color: 			nil, 
+		border_color: 		nil, 
+		text_color: 		nil,
+		bar_style: 			nil,
+		highlight_style: 	nil,
+		highlight_overlay: 	nil,
+		font: 				nil,
+		text: 				nil, 
+		**kwargs
+	)
+		unless nil_var?(*fg_color, *bg_color, *border_color, *text_color, *bar_style, *highlight_style, *highlight_overlay, *font, *text, **kwargs)
+			buf = "+ progress_bar {\n"
+			buf += single_property(val: fg_color, key: "fg_color", bracets: true)
+			buf += single_property(val: bg_color, key: "bg_color", bracets: true)
+			buf += single_property(val: border_color, key: "border_color", bracets: true)
+			buf += single_property(val: text_color, key: "text_color", bracets: true)
+			buf += single_property(val: bar_style, key: "bar_style", bracets: true)
+			buf += single_property(val: highlight_style, key: "highlight_style", bracets: true)
+			buf += single_property(val: highlight_overlay, key: "highlight_overlay", bracets: false)
+			buf += single_property(val: font, key: "font", bracets: true)
+			buf += single_property(val: text, key: "text", bracets: true)
+			buf += common_properties(**kwargs)
+			buf += "}\n"
+
+			@bufcomp += buf
+		else
+			warn("#{__method__}: no field(s) given, so nothing to do..", uplevel: 1)
+		end
+	end
 
 	## Circular progress.
+	### center_bitmap, tick_bitmap, num_ticks, ticks_disappear, start_angle
+	def circular_progress(center_bitmap: nil, tick_bitmap: nil, num_ticks: nil, ticks_disappear: nil, start_angle: nil, **kwargs)
+		unless nil_var?()
+			buf = "+ circular_progress {\n"
+			buf += single_property(val: center_bitmap, key: "center_bitmap", bracets: true)
+			buf += single_property(val: tick_bitmap, key: "tick_bitmap", bracets: true)
+			buf += single_property(val: num_ticks, key: "num_ticks", bracets: false)
+			buf += single_property(val: ticks_disappear, key: "ticks_disappear", bracets: false)
+			buf += single_property(val: start_angle, key: "start_angle", bracets: false)
+			buf += common_properties(**kwargs)
+			buf += "}\n"
+
+			@bufcomp += buf
+		else
+			warn("#{__method__}: no field(s) given, so nothing to do..", uplevel: 1)
+		end
+	end
 
 	## Boot menu.
+
+
+	def deneme(*kwargs)
+		puts(kwargs)
+	end
 
 	# Generate.
 	def gen()
@@ -190,15 +244,15 @@ class GrubTheme
 	end
 
 	private def nil_var?(*args, **kwargs)
-		ret = false
+		ret = true
 		args.each { |i|
 			unless i.nil?
-				ret = true
+				ret = false
 			end
 		}
 		kwargs.each { |i|
 			unless i.nil?
-				ret = true
+				ret = false
 			end
 		}
 
