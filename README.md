@@ -1,4 +1,7 @@
 # grubthemegen
+
+!["Gamer Car"](https://media.tenor.com/QAIGME2QHqkAAAAj/capoo-gaming.gif)
+
 Simple ruby library for generate cool(😎) GNU/Grub theme files.
 
 # Installation.
