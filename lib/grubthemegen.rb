@@ -258,8 +258,8 @@ class GrubTheme
 		end
 	end
 
-	# Component push.
-	def write2buf(*args)
+	# Component to sub buffer.
+	def push(*args)
 		args.each do |i|
 			if i.is_a?(String)
 				@bufcomp += i
@@ -270,43 +270,43 @@ class GrubTheme
 	# Generate.
 	def gen()
 		unless @title_text.nil?
-			push("title-text: \"#{@title_text}\"")
+			write2buf("title-text: \"#{@title_text}\"")
 		end
 
 		unless @title_font.nil?
-			push("title-font: \"#{@title_font}\"")
+			write2buf("title-font: \"#{@title_font}\"")
 		end
 
 		unless @title_color.nil?
-			push("title-color: \"#{@title_color}\"")
+			write2buf("title-color: \"#{@title_color}\"")
 		end
 
 		unless @message_font.nil?
-			push("message-font: \"#{@message_font}\"")
+			write2buf("message-font: \"#{@message_font}\"")
 		end
 
 		unless @message_color.nil?
-			push("message-color: \"#{@message_color}\"")
+			write2buf("message-color: \"#{@message_color}\"")
 		end
 
 		unless @message_bg_color.nil?
-			push("message-bg-color: \"#{@message_bg_color}\"")
+			write2buf("message-bg-color: \"#{@message_bg_color}\"")
 		end
 
 		unless @desktop_image.nil?
-			push("desktop-image: \"#{@desktop_image}\"")
+			write2buf("desktop-image: \"#{@desktop_image}\"")
 		end
 
 		unless @desktop_color.nil?
-			push("desktop-color: \"#{@desktop_color}\"")
+			write2buf("desktop-color: \"#{@desktop_color}\"")
 		end
 
 		unless @terminal_box.nil?
-			push("terminal-box: \"#{@terminal_box}\"")
+			write2buf("terminal-box: \"#{@terminal_box}\"")
 		end
 
 		unless @terminal_font.nil?
-			push("terminal-font: \"#{@terminal_font}\"")
+			write2buf("terminal-font: \"#{@terminal_font}\"")
 		end
 
 		if @bufcomp != ""
@@ -370,7 +370,7 @@ class GrubTheme
 		buf
 	end
 
-	private def push(data)
+	private def write2buf(data)
 		@buf += "#{data}\n"
 	end
 end

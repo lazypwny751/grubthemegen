@@ -6,6 +6,7 @@ The library makes so quick and dynamic grub themes, you can modify elements as y
 ## Create new sample.
 
 This example for just beginning.
+
 ```rb
 require "grubthemegen"
 
