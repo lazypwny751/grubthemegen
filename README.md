@@ -1,10 +1,11 @@
 # grubthemegen
-Simple ruby library for generate cool GNU/Grub theme files.
+Simple ruby library for generate cool(😎) GNU/Grub theme files.
 
 # Installation.
 ## From source.
 ```sh
-
+git clone https://github.com/lazypwny751/grubthemegen.git && cd grubthemegen
+make
 ```
 
 ## Or via gem.
