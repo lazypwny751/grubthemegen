@@ -113,9 +113,10 @@ class GrubTheme
 			buf += common_properties(**kwargs)
 			buf += "}\n"
 
-			@bufcomp += buf
+			buf
 		else
 			warn("#{__method__}: no field(s) given, so nothing to do..", uplevel: 1)
+			false
 		end
 	end
 
@@ -128,9 +129,10 @@ class GrubTheme
 			buf += common_properties(**kwargs)
 			buf += "}\n"
 
-			@bufcomp += buf
+			buf
 		else
 			warn("#{__method__}: \"file\" field is required for this component.", uplevel: 1)
+			false
 		end
 	end
 
@@ -162,9 +164,10 @@ class GrubTheme
 			buf += common_properties(**kwargs)
 			buf += "}\n"
 
-			@bufcomp += buf
+			buf
 		else
 			warn("#{__method__}: no field(s) given, so nothing to do..", uplevel: 1)
+			false
 		end
 	end
 
@@ -181,17 +184,46 @@ class GrubTheme
 			buf += common_properties(**kwargs)
 			buf += "}\n"
 
-			@bufcomp += buf
+			buf
 		else
 			warn("#{__method__}: no field(s) given, so nothing to do..", uplevel: 1)
+			false
 		end
 	end
 
 	## Boot menu.
 
+	# Vbox.
+	def vbox(*args, **kwargs)
+		buf = "+ vbox {"
+		args.each do |comp|
+			buf += "\n\t" + comp.split("\n").join("\n\t")
+		end
+		buf += "\n" + common_properties(**kwargs)
+		buf += "}\n"
 
-	def deneme(*kwargs)
-		puts(kwargs)
+		buf
+	end
+
+	# Hbox.
+	def hbox(*args, **kwargs)
+		buf = "+ hbox {"
+		args.each do |comp|
+			buf += "\n\t" + comp.split("\n").join("\n\t")
+		end
+		buf += "\n" + common_properties(**kwargs)
+		buf += "}\n"
+
+		buf
+	end
+
+	# Component push.
+	def write2buf(*args)
+		args.each do |i|
+			if i.is_a?(String)
+				@bufcomp += i
+			end
+		end
 	end
 
 	# Generate.
