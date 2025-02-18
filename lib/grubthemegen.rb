@@ -173,7 +173,14 @@ class GrubTheme
 
 	## Circular progress.
 	### center_bitmap, tick_bitmap, num_ticks, ticks_disappear, start_angle
-	def circular_progress(center_bitmap: nil, tick_bitmap: nil, num_ticks: nil, ticks_disappear: nil, start_angle: nil, **kwargs)
+	def circular_progress(
+		center_bitmap: nil,
+		tick_bitmap: nil,
+		num_ticks: nil,
+		ticks_disappear: nil,
+		start_angle: nil, 
+		**kwargs
+	)
 		unless nil_var?()
 			buf = "+ circular_progress {\n"
 			buf += single_property(val: center_bitmap, key: "center_bitmap", bracets: true)
@@ -192,29 +199,63 @@ class GrubTheme
 	end
 
 	## Boot menu.
+	### - item_font, selected_item_font, item_color, selected_item_color, icon_width, icon_height, item_height, item_padding
+	### - item_icon_space, item_spacing, menu_pixmap_style, item_pixmap_style, selected_item_pixmap_style, scrollbar
+	### - scrollbar_frame, scrollbar_thumb, scrollbar_thumb_overlay, scrollbar_slice, scrollbar_left_pad, scrollbar_right_pad
+	### - scrollbar_top_pad, scrollbar_bottom_pad, visible.
+	def boot_menu(
+		item_font: nil, 
+		**kwargs
+	)
+		unless nil_var?(*item_font, **kwargs)
+			buf = "+ boot_menu {\n"
+			buf += single_property(val: item_font, key: "item_font", bracets: true)
+			buf += common_properties(**kwargs)
+			buf += "}\n"
+
+			buf
+		else
+			warn("#{__method__}: no field(s) given, so nothing to do..", uplevel: 1)
+			false	
+		end
+	end
 
 	# Vbox.
 	def vbox(*args, **kwargs)
-		buf = "+ vbox {"
-		args.each do |comp|
-			buf += "\n\t" + comp.split("\n").join("\n\t")
-		end
-		buf += "\n" + common_properties(**kwargs)
-		buf += "}\n"
+		unless nil_var?(*args, **kwargs)
+			buf = "+ vbox {"
+			args.each do |comp|
+				if comp.is_a?(String)
+					buf += "\n\t" + comp.split("\n").join("\n\t")
+				end
+			end
+			buf += "\n" + common_properties(**kwargs)
+			buf += "}\n"
 
-		buf
+			buf
+		else
+			warn("#{__method__}: no field(s) given, so nothing to do..", uplevel: 1)
+			false
+		end
 	end
 
 	# Hbox.
 	def hbox(*args, **kwargs)
-		buf = "+ hbox {"
-		args.each do |comp|
-			buf += "\n\t" + comp.split("\n").join("\n\t")
-		end
-		buf += "\n" + common_properties(**kwargs)
-		buf += "}\n"
+		unless nil_var?(*args, **kwargs)
+			buf = "+ hbox {"
+			args.each do |comp|
+				if comp.is_a?(String)
+					buf += "\n\t" + comp.split("\n").join("\n\t")
+				end
+			end
+			buf += "\n" + common_properties(**kwargs)
+			buf += "}\n"
 
-		buf
+			buf
+		else
+			warn("#{__method__}: no field(s) given, so nothing to do..", uplevel: 1)
+			false
+		end
 	end
 
 	# Component push.

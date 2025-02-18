@@ -21,6 +21,7 @@ theme.write2buf("# direct write to component buffer.\n") # I don't recommend to 
 theme.write2buf(*components)
 theme.write2buf(theme.label(text: "very very cool grub 😎"))
 theme.label(text: "not included.") # This component will not be included.
+
 theme.write2buf(
 	theme.vbox(
 		theme.label(text: "this is vertical box label."),
