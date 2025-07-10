@@ -9,4 +9,4 @@ theme.message_color = "#000000"
 theme.message_bg_color = "#000000"
 theme.desktop_color = "#2857a8"
 
-puts(theme)
+puts(theme) # tempd out

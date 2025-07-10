@@ -10,6 +10,4 @@ class GrubThemeGen
 		  :desktop_image, :desktop_image_scale_method, :desktop_image_align,
 		  :desktop_image_v_align, :desktop_color, :terminal_box, :terminal_border,
 		  :terminal_left, :terminal_top, :terminal_width, :terminal_height
-
-	
 end
